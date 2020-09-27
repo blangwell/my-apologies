@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,6 +68,9 @@ TEMPLATES = [
     },
 ]
 
+# override Django default user 
+AUTH_USER_MODEL = 'main_app.Account'
+
 WSGI_APPLICATION = 'my_apologies.wsgi.application'
 
 
@@ -75,8 +79,8 @@ WSGI_APPLICATION = 'my_apologies.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'my_apologies',
     }
 }
 

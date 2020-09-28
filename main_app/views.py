@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
-from main_app.forms import RegistrationForm
+from django.contrib.auth import login, logout, authenticate
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account
+from main_app.forms import RegistrationForm, AccountAuthenticationForm
 
 # Create your views here.
 def index(request):
   return render(request, 'index.html')
 
+##### ACCOUNT AUTH VIEWS #######
 def registration_view(request):
   context = {}
   if request.POST:
@@ -27,3 +28,30 @@ def registration_view(request):
     form = RegistrationForm()
     context['registration_form'] = form
   return render(request, 'register.html', context)
+
+def logout_view(request):
+  logout(request)
+  return redirect('index')
+
+def login_view(request):
+  context = {}
+  user = request.user
+  if user.is_authenticated:
+    return redirect('index')
+  
+  if request.POST:
+    form = AccountAuthenticationForm(request.POST)
+    if form.is_valid():
+      email = request.POST['email']
+      password = request.POST['password']
+      user = authenticate(email=email, password=password)
+
+      if user:
+        login(request, user)
+        return redirect('index')
+
+  else:
+    form = AccountAuthenticationForm()
+
+  context['login_form'] = form
+  return render(request, 'account/login.html', context)

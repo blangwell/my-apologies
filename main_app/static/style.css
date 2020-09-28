@@ -1,17 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Peddana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
-
-/* .error-message {
-  background-color: orange;
-  font-family: 'Peddana', serif;
-  color: darkred; 
-} */
+.page-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  justify-content: center;
+}
 
 h1, h2 {
-  font-family: 'Peddana', serif;
+  font-family: 'Vollkorn', serif;
 }
 
 p {
-  background-color: orange;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+a {
   font-family: 'Peddana', serif;
+  font-size: 25px;
+  color: darkred;
+}
+
+.error-message {
+  
+  font-family: 'Peddana', serif;
+  font-size: 25px;
+  color: darkred; 
 }

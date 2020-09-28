@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from main_app.views import registration_view, login_view, logout_view
+from main_app.views import (
+    registration_view, 
+    login_view, 
+    logout_view,
+    about,
+)
 
 urlpatterns = [
     path('', include('main_app.urls')),
@@ -24,5 +29,5 @@ urlpatterns = [
     path('register/', registration_view, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
-    # path('about/', about_view, name='about'),
+    path('about/', about, name='about'),
 ]

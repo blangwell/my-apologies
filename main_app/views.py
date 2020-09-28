@@ -9,6 +9,9 @@ from main_app.forms import RegistrationForm, AccountAuthenticationForm
 def index(request):
   return render(request, 'index.html')
 
+def about(request):
+  return render(request, 'about.html')
+
 ##### ACCOUNT AUTH VIEWS #######
 def registration_view(request):
   context = {}

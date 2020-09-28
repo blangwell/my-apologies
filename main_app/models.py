@@ -1,15 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from taggit.managers import TaggableManager
 
+# class Tag (models.Model):
+#   tag_name = models.CharField(max_length=25)
+#   # ManyToManyField specifies a N:M relationship, many posts can have many tags
 
-class Tag (models.Model):
-  tag_name = models.CharField(max_length=25)
-  # ManyToManyField specifies a N:M relationship, many posts can have many tags
-
-  def __str__(self):
-    return self.tag_name
+#   def __str__(self):
+#     return self.tag_name
 
 #### CUSTOM USER ####
+
+''' 
+An alternative user manager for use with our custom 
+Account class
+'''
 
 class MyAccountManager(BaseUserManager):
   def create_user(self, email, password=None):
@@ -43,7 +48,10 @@ completely new User model from scratch with new fields
 class Account(AbstractBaseUser):
   email = models.EmailField(verbose_name="email", max_length=60, unique=True)
   display_name = models.CharField(max_length=30, default='Anonymous')
-  tags = models.ManyToManyField(Tag)
+  # tags = models.ManyToManyField(Tag)
+  # tags = TaggableManager()
+  user_tags = models.CharField(max_length=1500, blank=True, null=True)
+
 
   # The following fields are required by AbstractBaseUser to create custom User model.
   username = models.CharField(max_length=30, unique=True)
@@ -68,6 +76,11 @@ class Account(AbstractBaseUser):
   def has_module_perms(self,app_label):
     return True
 
+def set_username(sender, instance, **kwargs): # **kwargs pass keyworded variable length of args to this function
+  if not instance.username:
+    instance.username = instance.email
+
+
 
 
 class Post (models.Model):
@@ -75,7 +88,8 @@ class Post (models.Model):
   public = models.BooleanField(default=False)
   # ForeignKey is used for 1:M relationships, one user can have many posts
   user = models.ForeignKey(Account, on_delete=models.CASCADE)
-  tags = models.ManyToManyField(Tag)
+  # tags = models.ManyToManyField(Tag)
+  tags = TaggableManager()
 
   def __str__(self):
     return self.post_text

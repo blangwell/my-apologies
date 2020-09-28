@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,8 @@ TEMPLATES = [
 
 # override Django default user 
 AUTH_USER_MODEL = 'main_app.Account'
+
+TAGGIT_CASE_INSENSITIVE = True
 
 WSGI_APPLICATION = 'my_apologies.wsgi.application'
 

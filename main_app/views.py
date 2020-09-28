@@ -29,14 +29,17 @@ def registration_view(request):
     context['registration_form'] = form
   return render(request, 'register.html', context)
 
+
 def logout_view(request):
   logout(request)
   return redirect('index')
+
 
 def login_view(request):
   context = {}
   user = request.user
   if user.is_authenticated:
+    # if a user is signed in, should redirect to index
     return redirect('index')
   
   if request.POST:
@@ -54,4 +57,4 @@ def login_view(request):
     form = AccountAuthenticationForm()
 
   context['login_form'] = form
-  return render(request, 'account/login.html', context)
+  return render(request, 'login.html', context)

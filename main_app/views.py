@@ -1,16 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account
 from main_app.forms import RegistrationForm, AccountAuthenticationForm
 
-# Create your views here.
 def index(request):
   return render(request, 'index.html')
 
 def about(request):
   return render(request, 'about.html')
+
+@login_required
+def profile(request, email):
+  account = Account.objects.get(email=email)
+  return render(request, 'profile.html', {'email': email})
 
 ##### ACCOUNT AUTH VIEWS #######
 def registration_view(request):

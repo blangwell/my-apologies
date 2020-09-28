@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Peddana&display=swap');
 
+
+/* .error-message {
+  background-color: orange;
+  font-family: 'Peddana', serif;
+  color: darkred; 
+} */
+
 h1, h2 {
   font-family: 'Peddana', serif;
 }
 
+p {
+  background-color: orange;
+  font-family: 'Peddana', serif;
+}

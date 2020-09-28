@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <h1>Login</h1>
@@ -23,18 +25,18 @@
     {% endcomment %}
     {% for field in login_form %}
       {% for error in field.errors %}
-        {{ error }}
+        <p class="error-message">{{ error }}</p>
       {% endfor %}
     {% endfor %}
 
     {% comment %} 
-    Non field error handles errors with the entire form
-    Not just a specific field in that form
+      Non field error handles errors with the entire form
+      Not just a specific field in that form
     {% endcomment %}
     {% if login_form.non_field_errors %}
       <div>
         {% for error in login_form.non_field_errors%}
-        <p>{{error}}</p>
+          <p class="error-message">{{ error }}</p>
         {% endfor %}
       </div>
     {% endif %}

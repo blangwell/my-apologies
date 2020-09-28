@@ -17,11 +17,15 @@
       </p>
     {% endfor %}
 
-    {% comment %} {% for field in login_form %}
+    {% comment %} 
+      Here we display specific problems with login fields
+      ie. an invalid email such as example#gmail.cm
+    {% endcomment %}
+    {% for field in login_form %}
       {% for error in field.errors %}
-        <p>{{ error }}</p>
+        {{ error }}
       {% endfor %}
-    {% endfor %} {% endcomment %}
+    {% endfor %}
 
     {% comment %} 
     Non field error handles errors with the entire form
@@ -29,7 +33,9 @@
     {% endcomment %}
     {% if login_form.non_field_errors %}
       <div>
-        <p>{{login_form.non_field_errors}}</p>
+        {% for error in login_form.non_field_errors%}
+        <p>{{error}}</p>
+        {% endfor %}
       </div>
     {% endif %}
 

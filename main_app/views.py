@@ -117,7 +117,7 @@ class ApologyLetterUpdate(UpdateView):
     self.object = form.save(commit=False)
     self.object.user = self.request.user
     self.object.save()
-    return HttpResponseRedirect(f'/account/{str(self.object.pk)}')
+    return HttpResponseRedirect(f'/account/{str(self.object.user)}')
 
 
 # @login_required

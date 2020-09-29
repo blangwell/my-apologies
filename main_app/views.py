@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models.signals import pre_save
-from main_app.models import set_username, Account
+from main_app.models import set_username, Account, Apology
 from main_app.forms import RegistrationForm, AccountAuthenticationForm, ApologyForm
 
 
@@ -17,8 +17,9 @@ def about(request):
 
 @login_required
 def profile(request, email):
-  account = Account.objects.get(email=email)
-  return render(request, 'profile.html', {'email': email})
+  user = Account.objects.get(email=email)
+  apologies = Apology.objects.filter(user=user)
+  return render(request, 'profile.html', {'email': email, 'apologies': apologies})
 
 ##### ACCOUNT AUTH VIEWS #######
 def registration_view(request):

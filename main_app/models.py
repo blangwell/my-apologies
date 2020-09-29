@@ -90,6 +90,8 @@ class Apology(models.Model):
   user = models.ForeignKey(Account, on_delete=models.CASCADE)
   # tags = models.ManyToManyField(Tag)
   tags = TaggableManager()
+  created_at = models.DateField(auto_now_add=True)
+  updated_at = models.DateField(auto_now=True)
 
   def __str__(self):
     return self.post_text

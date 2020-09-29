@@ -3,6 +3,9 @@
 {% block content %}
   <div class="page-content">
     <h1>{{email}}'s Profile</h1>
-
+    {% for apology in apologies %}
+      <p>{{apology.updated_at}}</p>
+      <p>{{ apology.post_text }}</p>
+    {% endfor %}
   </div>
 {% endblock %}

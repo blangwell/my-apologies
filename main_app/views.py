@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account
-from main_app.forms import RegistrationForm, AccountAuthenticationForm
+from main_app.forms import RegistrationForm, AccountAuthenticationForm, ApologyForm
 
 
 def index(request):
@@ -88,3 +88,17 @@ def change_password(request):
   else:
     form = PasswordChangeForm(request.user)
   return render(request, 'change_password.html', {'form': form})
+
+
+#### APOLOGY #######
+@login_required
+def write_apology_letter(request):
+  # user = request.user
+  form = ApologyForm(request.POST or None)
+  if form.is_valid():
+    form.save()
+  
+  context = {
+    'form': form
+  }
+  return render(request, 'apology.html', context)

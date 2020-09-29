@@ -83,8 +83,8 @@ def set_username(sender, instance, **kwargs): # **kwargs pass keyworded variable
 
 
 
-class Post (models.Model):
-  post_text = models.CharField(max_length=1500)
+class Apology(models.Model):
+  post_text = models.CharField(max_length=3000)
   public = models.BooleanField(default=False)
   # ForeignKey is used for 1:M relationships, one user can have many posts
   user = models.ForeignKey(Account, on_delete=models.CASCADE)

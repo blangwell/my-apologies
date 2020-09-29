@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from main_app.models import Account
-from main_app.models import Post
+from main_app.models import Apology
 
 # An admin panel for our custom Account class
 class AccountAdmin(UserAdmin):
@@ -14,4 +14,4 @@ class AccountAdmin(UserAdmin):
   fieldsets = ()
 
 admin.site.register(Account, AccountAdmin)
-admin.site.register(Post)
+admin.site.register(Apology)

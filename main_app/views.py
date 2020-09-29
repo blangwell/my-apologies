@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.decorators import method_decorator
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account, Apology
 from main_app.forms import RegistrationForm, AccountAuthenticationForm, ApologyForm
@@ -105,3 +107,23 @@ def write_apology_letter(request):
     'form': form
   }
   return render(request, 'apology.html', context)
+
+@method_decorator(login_required, name='dispatch')
+class ApologyLetterUpdate(UpdateView):
+  model = Apology
+  fields = ['post_text', 'public']
+
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.user = self.request.user
+    self.object.save()
+    return HttpResponseRedirect(f'/account/{str(self.object.pk)}')
+
+
+# @login_required
+# class ApologyLetterDelete(DeleteView):
+#   model = Apology
+#   def success_redirect(self):
+#     user = self.object.user
+#     return HttpResponseRedirect(f'/account/{user}')
+

@@ -25,4 +25,3 @@ class AccountAuthenticationForm(forms.ModelForm):
       if not authenticate(email=email, password=password):
         raise forms.ValidationError('Email or Password is incorrect')
 
-# class CustomPasswordChangeForm(PasswordChangeForm):

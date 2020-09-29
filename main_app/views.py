@@ -70,6 +70,10 @@ def login_view(request):
   context['login_form'] = form
   return render(request, 'login.html', context)
 
+''' 
+NOTE: the change_password does not require class inheritence
+so i have included it as a views function 
+'''
 @login_required
 def change_password(request):
   if request.method == 'POST':

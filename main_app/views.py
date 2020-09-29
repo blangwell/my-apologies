@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account
 from main_app.forms import RegistrationForm, AccountAuthenticationForm
+
 
 def index(request):
   return render(request, 'index.html')
@@ -66,3 +69,18 @@ def login_view(request):
 
   context['login_form'] = form
   return render(request, 'login.html', context)
+
+@login_required
+def change_password(request):
+  if request.method == 'POST':
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+      user = form.save()
+      update_session_auth_hash(request, user)
+      messages.success(request, 'Your password was successfully updated')
+      return redirect('index')
+    else:
+      messages.error(request, 'Error changing password!')
+  else:
+    form = PasswordChangeForm(request.user)
+  return render(request, 'change_password.html', {'form': form})

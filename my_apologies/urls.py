@@ -22,6 +22,7 @@ from main_app.views import (
     logout_view,
     about,
     profile,
+    change_password,
 )
 
 urlpatterns = [
@@ -32,4 +33,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('about/', about, name='about'),
     path('account/<email>', profile, name='profile'),
+    path('password/', change_password, name='change_password')
 ]

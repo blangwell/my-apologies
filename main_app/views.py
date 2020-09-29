@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -80,7 +80,7 @@ def change_password(request):
       messages.success(request, 'Your password was successfully updated')
       return redirect('index')
     else:
-      messages.error(request, 'Error changing password!')
+      messages.warning(request, 'Error changing password!')
   else:
     form = PasswordChangeForm(request.user)
   return render(request, 'change_password.html', {'form': form})

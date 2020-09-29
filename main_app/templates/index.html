@@ -3,6 +3,13 @@
 {% comment %} {% load static %} {% endcomment %}
 
 {% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    <p>{{message}}</p>
+  {% endfor %}
+{% endif %}
+
 <div class="page-content">
   <h1>My Apologies</h1>
   <h2>An experiment in indirect amends</h2>

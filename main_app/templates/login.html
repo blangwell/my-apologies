@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Login</h1>
+  <form method="post">
+    {% csrf_token %}
+
+    {% for field in login_form %}
+      <p>
+        {{ field.label_tag }}
+        {{ field }}
+
+        {% if field.help_text %}
+          <small>{{ field.help_text }}</small>
+        {% endif %}
+      </p>
+    {% endfor %}
+
+    {% comment %} 
+      Here we display specific problems with login fields
+      ie. an invalid email such as example#gmail.cm
+    {% endcomment %}
+    {% for field in login_form %}
+      {% for error in field.errors %}
+        <p class="error-message">{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+
+    {% comment %} 
+      Non field error handles errors with the entire form
+      Not just a specific field in that form
+    {% endcomment %}
+    {% if login_form.non_field_errors %}
+      <div>
+        {% for error in login_form.non_field_errors %}
+          <p class="error-message">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <input type="submit" value="Login" />
+  </form>
+
+{% endblock %}

@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
+{% comment %} {% load static %} {% endcomment %}
+
 {% block content %}
-<h1>My Apologies</h1>
+
+{% if messages %}
+  {% for message in messages %}
+    <p>{{message}}</p>
+  {% endfor %}
+{% endif %}
+
+<div class="page-content">
+  <h1>My Apologies</h1>
+  <h2>An experiment in indirect amends</h2>
+  <p>Have you ever written a letter to someone you have wronged? Have you ever wanted to send the letter but knew it was better not to? With My Apologies, instead of throwing these letters into a drawer or into the fire, we release them into the world. <a href="{% url 'about' %}">Learn More</a></p>
+  
+</div>
 {% endblock %}

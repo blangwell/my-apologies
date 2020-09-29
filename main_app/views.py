@@ -95,6 +95,7 @@ def change_password(request):
 def write_apology_letter(request):
   # user = request.user
   form = ApologyForm(request.POST or None)
+  form.instance.user = request.user
   if form.is_valid():
     form.save()
   

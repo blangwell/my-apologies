@@ -26,8 +26,17 @@ class AccountAuthenticationForm(forms.ModelForm):
       if not authenticate(email=email, password=password):
         raise forms.ValidationError('Email or Password is incorrect')
 
-class ApologyForm(forms.Form):
-  post_text = forms.CharField(max_length=3000)
-  # public = forms.BooleanField()
+class ApologyForm(forms.ModelForm):
+  class Meta:
+    model = Apology
+    widgets = {
+      'post_text': forms.Textarea
+    }
+    fields = [
+      'post_text',
+      'public'
+    ]
+    # post_text = forms.CharField(max_length=3000, label='', widget=forms.Textarea)
+    # public = forms.BooleanField(required=False)
 
   # tags

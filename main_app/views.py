@@ -140,7 +140,8 @@ def apology_show(request, apology_id):
   return render(request, 'apologies/show.html', {'apology': apology})
 
 def apology_index(request):
-  apologies = Apology.objects.filter(public=True)
+  # we must order_by a unique field (id) and then the date updated to prevent dupes in pagination
+  apologies = Apology.objects.filter(public=True).order_by('id', 'updated_at')
   paginator = Paginator(apologies, 1)
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)

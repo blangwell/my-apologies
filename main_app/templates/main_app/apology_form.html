@@ -6,6 +6,11 @@
     <table>
       {{ form.post_text}}
       <p>{{ form.public.label}} {{form.public}}</p>
+      <p>Tags:</p>
+      {% for tag in apology.tags.all %}
+      <p class="tag">{{tag.name}}</p>
+      {% endfor %}
+      {% comment %} <p>{{form.tags}}</p>  {% endcomment %}
     </table>
     <input type="submit" value="Submit">
   </form>

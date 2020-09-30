@@ -124,7 +124,9 @@ def write_apology_letter(request):
   form.instance.user = request.user
   if form.is_valid():
     # obj = form.save(commit=False)
+    # obj.user = request.user
     form.save()
+    form.save_m2m()
     return HttpResponseRedirect('/account/' + str(request.user))
   
   context = {

@@ -29,9 +29,9 @@ class AccountAuthenticationForm(forms.ModelForm):
 class ApologyForm(forms.ModelForm):
   class Meta:
     model = Apology
-    widgets = {
-      'post_text': forms.Textarea
-    }
+    # widgets = {
+    #   'post_text': forms.Textarea
+    # }
     fields = [
       'post_text',
       'public',

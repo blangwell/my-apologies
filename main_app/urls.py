@@ -11,6 +11,7 @@ from main_app.views import (
     write_apology_letter,
     ApologyLetterDelete,
     ApologyLetterUpdate,
+    apology_show,
 )
 
 
@@ -25,4 +26,5 @@ urlpatterns = [
   path('apology/', write_apology_letter, name='apology'),
   path('apology/<int:pk>/update/', ApologyLetterUpdate.as_view(), name='apology_delete'),
   path('apology/<int:pk>/delete/', ApologyLetterDelete.as_view(), name='apology_delete'),
+  path('apology/<int:apology_id>', apology_show, name='apology_show'),
 ]

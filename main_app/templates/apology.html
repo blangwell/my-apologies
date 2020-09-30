@@ -3,7 +3,11 @@
   <h1>Compose a Letter</h1>
   <form method="post">
     {% csrf_token %}
-    {{form.as_p}}
+    {% comment %} {{form.as_p}} {% endcomment %}
+    {% for field in form %}
+      <p>{{field.label_tag}}</p>
+      {{field}}
+    {% endfor %}
   <input type="submit" value="Save">
   </form>
 {% endblock %}

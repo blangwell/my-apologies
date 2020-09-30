@@ -125,4 +125,7 @@ class ApologyLetterDelete(DeleteView):
   model = Apology
   def get_success_url(self):
     return reverse_lazy('profile', kwargs={'email': self.request.user})
-  
+
+def apology_show(request, apology_id):
+  apology = Apology.objects.get(id=apology_id)
+  return render(request, 'apologies/show.html', {'apology': apology})

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Apology Index</h1>
+  {% for apology in apologies %}
+  <p>{{apology}}</p>
+  <p> - {{apology.user.display_name}}</p>
+  <p> ---%%---
+  {% endfor %}
+{% endblock %}

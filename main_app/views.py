@@ -130,3 +130,7 @@ class ApologyLetterDelete(DeleteView):
 def apology_show(request, apology_id):
   apology = Apology.objects.get(id=apology_id)
   return render(request, 'apologies/show.html', {'apology': apology})
+
+def apology_index(request):
+  apologies = Apology.objects.filter(public=True)
+  return render(request, 'apologies/index.html', {'apologies': apologies})

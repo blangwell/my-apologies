@@ -3,7 +3,7 @@
 {% block content %}
   <div class="page-content">
     <h1>{{email}}'s Profile</h1>
-    <a href="{% url 'apology'%}" style="font-size: 35px;">Write a New Letter</a>
+    <a href="{% url 'apology_create'%}" style="font-size: 35px;">Write a New Letter</a>
     <h2>Your Letters</h2>
     {% for apology in apologies %}
     {% comment %} <a href="{% url 'apology_show' apology.id %}" style="font-size: 20px;"> {% endcomment %}

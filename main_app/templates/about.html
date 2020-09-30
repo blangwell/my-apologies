@@ -16,7 +16,7 @@ if logged out - login/register
 {% endcomment %}
 
 {% if request.user.is_authenticated %}
-  <a href="{% url 'apology' %}">Write a Letter</a>
+  <a href="{% url 'apology_create' %}">Write a Letter</a>
 {% else %}
   <a href="{% url 'register' %}">Register</a><br />
   <a href="{% url 'login' %}">Login</a>

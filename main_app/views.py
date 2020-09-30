@@ -65,7 +65,8 @@ def login_view(request):
 
       if user:
         login(request, user)
-        return redirect('index')
+        return HttpResponseRedirect('/account/' + str(request.user))
+
 
   else:
     form = AccountAuthenticationForm()

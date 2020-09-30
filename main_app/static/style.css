@@ -24,9 +24,11 @@ a {
   color: darkred;
 }
 
-.error-message {
+.error-message  {
   
   font-family: 'Peddana', serif;
   font-size: 25px;
   color: darkred; 
+  list-style: none;
+
 }

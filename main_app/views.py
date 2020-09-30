@@ -24,6 +24,11 @@ def profile(request, email):
   apologies = Apology.objects.filter(user=user)
   return render(request, 'profile.html', {'email': email, 'apologies': apologies})
 
+@login_required
+def settings(request, email):
+  user = Account.objects.get(email=email)
+  return render(request, 'settings.html', {'user': user})
+
 ##### ACCOUNT AUTH VIEWS #######
 def registration_view(request):
   context = {}
@@ -95,6 +100,7 @@ def change_password(request):
   return render(request, 'change_password.html', {'form': form})
 
 
+
 #### APOLOGY #######
 @login_required
 def write_apology_letter(request):
@@ -106,7 +112,8 @@ def write_apology_letter(request):
     return HttpResponseRedirect('/account/' + str(request.user))
   
   context = {
-    'form': form
+    'form': form,
+    'user': form.instance.user
   }
   return render(request, 'apology.html', context)
 

@@ -6,11 +6,10 @@
     <a href="{% url 'apology_create'%}" style="font-size: 35px;">Write a New Letter</a>
     <h2>Your Letters</h2>
     {% for apology in apologies %}
-    {% comment %} <a href="{% url 'apology_show' apology.id %}" style="font-size: 20px;"> {% endcomment %}
-      <p>{{apology.updated_at}} : {{ apology.post_text|slice:'0:4'}}...
-    {% comment %} </a> {% endcomment %}
+      <p>{{apology.updated_at}} : {{ apology.post_text|slice:'0:4'}}...  
     <a href="{% url 'apology_update' apology.id %}">Edit Letter</a>
     </p>
     {% endfor %}
+    <a href="{% url 'account_settings' email %}">Account Settings</a>
   </div>
 {% endblock %}

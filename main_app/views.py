@@ -10,6 +10,7 @@ from django.db.models.signals import pre_save
 from main_app.models import set_username, Account, Apology
 from main_app.forms import RegistrationForm, AccountAuthenticationForm, ApologyForm
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 def index(request):
   return render(request, 'index.html')
@@ -133,4 +134,7 @@ def apology_show(request, apology_id):
 
 def apology_index(request):
   apologies = Apology.objects.filter(public=True)
-  return render(request, 'apologies/index.html', {'apologies': apologies})
+  paginator = Paginator(apologies, 1)
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  return render(request, 'apologies/index.html', {'apologies': apologies, 'page_obj': page_obj})

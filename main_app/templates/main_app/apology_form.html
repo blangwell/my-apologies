@@ -4,12 +4,13 @@
   <form method="post">
     {% csrf_token %}
     <table>
-      {% comment %} {{ form.as_table }} {% endcomment %}
       {% comment %} {% for field in form %}
       <p>{{field.label_tag}}</p>
-      {{field}} {% endcomment %}
-      {% comment %} {% endfor %} {% endcomment %}
-      {{form}}
+      {{field}} 
+       {% endfor %} {% endcomment %}
+      {% comment %} {{form}} {% endcomment %}
+      {{ form.post_text}}
+      <p>{{ form.public.label}} {{form.public}}</p>
     </table>
     <input type="submit" value="Submit">
   </form>

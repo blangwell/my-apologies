@@ -9,7 +9,7 @@ from main_app.views import (
     profile,
     change_password,
     write_apology_letter,
-    # ApologyLetterDelete,
+    ApologyLetterDelete,
     ApologyLetterUpdate,
 )
 
@@ -23,6 +23,6 @@ urlpatterns = [
   path('account/<email>', profile, name='profile'),
   path('password/', change_password, name='change_password'),
   path('apology/', write_apology_letter, name='apology'),
-  # path('apology/<int:pk>/delete/', ApologyLetterDelete, name='apology_delete'),
-  path('apology/<int:pk>/update/', views.ApologyLetterUpdate.as_view(), name='apology_delete'),
+  path('apology/<int:pk>/update/', ApologyLetterUpdate.as_view(), name='apology_delete'),
+  path('apology/<int:pk>/delete/', ApologyLetterDelete.as_view(), name='apology_delete'),
 ]

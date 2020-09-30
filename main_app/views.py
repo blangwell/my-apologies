@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.db.models.signals import pre_save
 from main_app.models import set_username, Account, Apology
 from main_app.forms import RegistrationForm, AccountAuthenticationForm, ApologyForm
-
+from django.urls import reverse_lazy
 
 def index(request):
   return render(request, 'index.html')
@@ -120,10 +120,9 @@ class ApologyLetterUpdate(UpdateView):
     return HttpResponseRedirect(f'/account/{str(self.object.user)}')
 
 
-# @login_required
-# class ApologyLetterDelete(DeleteView):
-#   model = Apology
-#   def success_redirect(self):
-#     user = self.object.user
-#     return HttpResponseRedirect(f'/account/{user}')
-
+@method_decorator(login_required, name='dispatch')
+class ApologyLetterDelete(DeleteView):
+  model = Apology
+  def get_success_url(self):
+    return reverse_lazy('profile', kwargs={'email': self.request.user})
+  

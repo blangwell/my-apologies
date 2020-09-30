@@ -36,7 +36,3 @@ class ApologyForm(forms.ModelForm):
       'post_text',
       'public'
     ]
-    # post_text = forms.CharField(max_length=3000, label='', widget=forms.Textarea)
-    # public = forms.BooleanField(required=False)
-
-  # tags

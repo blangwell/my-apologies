@@ -99,7 +99,22 @@ def change_password(request):
     form = PasswordChangeForm(request.user)
   return render(request, 'change_password.html', {'form': form})
 
+@method_decorator(login_required, name='dispatch')
+class DisplayNameUpdate(UpdateView):
+    model = Account
+    fields = ['display_name']
 
+    def form_valid(self, form):
+      self.object = form.save(commit=False)
+      self.object.user = self.request.user
+      self.object = form.save()
+      
+      return HttpResponseRedirect(f'/account/{str(self.object.user)}/settings')
+
+# @login_required
+# def display_name_update(request):
+  
+  
 
 #### APOLOGY #######
 @login_required

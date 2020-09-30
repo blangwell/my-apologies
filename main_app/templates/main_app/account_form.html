@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit Display Name</h1>
+  <p>Current Display Name:</p>
+  <p>{{user.display_name}}</p>
+  <form method="post">
+    {% csrf_token %}
+    <p>{{form.display_name}}</p>
+    <input type="submit" value="Update Display Name">
+  </form>
+{% endblock %}

@@ -2,11 +2,12 @@
 
 {% block content %}
   <h1>Account Settings</h1>
-  <h2>Display Name:</h2>
-  <p>{{user.display_name}}</p>
   {% comment %} <a href=""></a> {% endcomment %}
   <h2>Email:</h2>
   <p>{{user.email}}</p>
+  <h2>Display Name:</h2>
+  <p>{{user.display_name}}</p>
+  <a href="{% url 'update_display_name' user.id%}">Update Display Name</a>
   <h2>Password:</h2>
   <p>*******</p>
   <a href="{% url 'change_password' %}">Change Password</a>

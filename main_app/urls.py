@@ -14,6 +14,7 @@ from main_app.views import (
     apology_show,
     apology_index,
     settings,
+    DisplayNameUpdate,
 )
 
 
@@ -30,5 +31,6 @@ urlpatterns = [
   path('apology/<int:pk>/delete/', ApologyLetterDelete.as_view(), name='apology_delete'),
   path('apology/<int:apology_id>', apology_show, name='apology_show'),
   path('apology/index', apology_index, name='apology_index'),
-  path('account/<email>/settings', settings, name='account_settings')
+  path('account/<email>/settings', settings, name='account_settings'),
+  path('account/settings/display_name/<int:pk>', DisplayNameUpdate.as_view(), name='update_display_name'),
 ]

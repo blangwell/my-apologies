@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
   <div class="page-content">
     <h1>{{email}}'s Profile</h1>
-    <a href="{% url 'apology_create'%}" style="font-size: 35px;">Write a New Letter</a>
+    <a href="{% url 'apology_create'%}">Write a New Letter</a>
     <h2>Your Letters</h2>
     {% for apology in apologies %}
       <p>{{apology.updated_at}} : {{ apology.post_text|slice:'0:4'}}...  
-    <a href="{% url 'apology_update' apology.id %}">Edit Letter</a>
-    </p>
+    <a href="{% url 'apology_update' apology.id %}">Edit Letter</a></p>
     {% endfor %}
     <a href="{% url 'account_settings' email %}">Account Settings</a>
   </div>

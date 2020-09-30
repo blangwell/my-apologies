@@ -34,5 +34,6 @@ class ApologyForm(forms.ModelForm):
     }
     fields = [
       'post_text',
-      'public'
+      'public',
+      'tags'
     ]

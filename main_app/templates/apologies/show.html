@@ -3,6 +3,9 @@
 {% block content %}
 <div>
   <h1>Apology Show</h1>
+  {% comment %} {% for tag in apology.tags %}
+    {{tag}}
+  {% endfor %} {% endcomment %}
   {{apology.post_text}}
   
 </div>

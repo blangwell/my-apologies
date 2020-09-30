@@ -116,13 +116,14 @@ class DisplayNameUpdate(UpdateView):
   
   
 
-#### APOLOGY #######
+###### APOLOGY #######
 @login_required
 def write_apology_letter(request):
   # user = request.user
   form = ApologyForm(request.POST or None)
   form.instance.user = request.user
   if form.is_valid():
+    # obj = form.save(commit=False)
     form.save()
     return HttpResponseRedirect('/account/' + str(request.user))
   

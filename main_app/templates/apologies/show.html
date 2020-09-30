@@ -4,6 +4,9 @@
 <div>
   <h1>Apology Show</h1>
   {{apology.post_text}}
+  
+  <a href="{% url 'apology_update' apology.id %}">Edit</a>
+
 </div>
 
 {% endblock %}

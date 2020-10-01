@@ -33,10 +33,10 @@ else:
     DJANGO_HOST = "development"
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
-    DEBUG = False # set debug to false to display url error messages properly
+    DEBUG = bool(os.environ.get('DEBUG', '')) # set debug to false to display url error messages properly
     STATIC_URL = 'https://my-apologies.herokuapp.com'
 else:
-    DEBUG = True
+    DEBUG = bool(True)
     STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

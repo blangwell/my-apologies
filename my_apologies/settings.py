@@ -165,29 +165,29 @@ USE_TZ = True
 
 
 # Define EMAIL_BACKEND variable for DJANGO_HOST
-if DJANGO_HOST == "production":
-    # Output to SMTP server on DJANGO_HOST production
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-elif DJANGO_HOST == "testing":
-    # Nullify output on DJANGO_HOST test
-    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-else: 
-    # Output to console for all others
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# Define CACHES variable for DJANGO_HOST production and all other hosts 
-if DJANGO_HOST == "production":
-   # Set cache
-   CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-            'TIMEOUT':'1800',
-            }
-        }
-   CACHE_MIDDLEWARE_SECONDS = 1800
-else: 
-   # No cache for all other hosts
-   pass
+# if DJANGO_HOST == "production":
+#     # Output to SMTP server on DJANGO_HOST production
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# elif DJANGO_HOST == "testing":
+#     # Nullify output on DJANGO_HOST test
+#     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# else: 
+#     # Output to console for all others
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # Define CACHES variable for DJANGO_HOST production and all other hosts 
+# if DJANGO_HOST == "production":
+#    # Set cache
+#    CACHES = {
+#         'default': {
+#             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#             'LOCATION': '127.0.0.1:11211',
+#             'TIMEOUT':'1800',
+#             }
+#         }
+#    CACHE_MIDDLEWARE_SECONDS = 1800
+# else: 
+#    # No cache for all other hosts
+#    pass
 
 
 #####################

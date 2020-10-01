@@ -36,7 +36,6 @@ urlpatterns = [
   path('account/<email>', profile, name='profile'),
   path('account/<email>/settings', settings, name='account_settings'),
   path('account/settings/display_name/<int:pk>', DisplayNameUpdate.as_view(), name='update_display_name'),
+  path('404', views.handler404, name="404"),
+  path('500', views.handler500, name="500"),
 ]
-
-handler404 = views.handler404,
-handler500 = views.handler500,

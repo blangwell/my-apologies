@@ -33,10 +33,10 @@ else:
     DJANGO_HOST = "development"
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
-    DEBUG = bool(os.environ.get('DEBUG', '')) # set debug to false to display url error messages properly
+    DEBUG = False # set debug to false to display url error messages properly
     STATIC_URL = 'https://my-apologies.herokuapp.com'
 else:
-    DEBUG = bool(True)
+    DEBUG = True
     STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -54,21 +54,21 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['my-apologies.herokuapp.com', '127.0.0.1',]
+ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
     'main_app',
+    'taggit',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'taggit',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [

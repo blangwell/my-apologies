@@ -40,7 +40,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 #     STATIC_URL = '/static/'
 
 DEBUG = False # set debug to false to display url error messages properly
-STATIC_URL = 'https://my-apologies.herokuapp.com'
+STATIC_URL = 'https://my-apologies.herokuapp.com/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

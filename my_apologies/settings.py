@@ -54,7 +54,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['my-apologies.herokuapp.com']
+ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 
 
 # Application definition

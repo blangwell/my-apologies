@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from django.conf.urls.static import static
 
 from main_app.views import (
     registration_view, 

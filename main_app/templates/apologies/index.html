@@ -4,13 +4,13 @@
   <h1>Letters</h1>
 
   {% for apology in page_obj %}
-    {% if apology.tags %}
-      {% for tag in apology.tags.all %}
-        <small>Content Warning: {{tag}}</small>
-      {% endfor %}
+    {% if apology.tags.all %}
+      <p class="content-warning" style="font-family: 'Vollkorn', serif; display: inline;">Content Warning:
+      {% for tag in apology.tags.all %}<small>{{tag}} | </small>{% endfor %}
+       </p>
     {% endif %}
-    <p>{{apology}}</p>
-    <p> - {{apology.user.display_name}}</p>
+    <p class="apology-text" style="max-width: 300px;">{{apology}}</p>
+    <p style="font-family: 'Vollkorn', serif;"> - {{apology.user.display_name}}</p>
   {% endfor %}
 
   <div class="pagination">

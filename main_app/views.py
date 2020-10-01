@@ -19,12 +19,9 @@ def about(request):
   return render(request, 'about.html')
 
 @login_required
+def profile(request, email):
   user = Account.objects.get(email=email)
-  try:
-    def profile(request, email):
-    apologies = Apology.objects.filter(user=user)
-  except user.DoesNotExist:
-    raise Http404('Can\'t get that Letter')
+  apologies = Apology.objects.filter(user=user)
   return render(request, 'profile.html', {'email': email, 'apologies': apologies})
 
 @login_required

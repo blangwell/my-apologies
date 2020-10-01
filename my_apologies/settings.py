@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'taggit',
     # 'whitenoise',
 ]
@@ -127,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')

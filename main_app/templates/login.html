@@ -9,14 +9,12 @@
     {% csrf_token %}
 
     {% for field in login_form %}
-      <p>
-        {{ field.label_tag }}
-        {{ field }}
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }}</p>
 
         {% if field.help_text %}
           <small>{{ field.help_text }}</small>
         {% endif %}
-      </p>
     {% endfor %}
 
     {% comment %} 
@@ -41,7 +39,7 @@
       </div>
     {% endif %}
 
-    <input type="submit" value="Login" />
+    <input type="submit" value="Login" class="form-button"/>
   </form>
 
 {% endblock %}

@@ -54,3 +54,13 @@ a:hover {
 .tag {
   border: 1px solid #000;
 }
+
+.form-button {
+  background-color: #fff;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+#hamburger {
+  border-style: none;
+}

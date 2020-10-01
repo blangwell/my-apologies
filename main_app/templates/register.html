@@ -6,9 +6,8 @@
   <form method="post">
     {% csrf_token %}
     {% for field in registration_form %}
-      <p>
-        {{ field.label_tag }}
-        {{ field }}
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }}</p>
 
         {% comment %} {% if field.help_text %}
           <small>{{ field.help_text }}</small>
@@ -17,10 +16,9 @@
         {% for error in field.errors %}
           <p>{{ error }}</p>
         {% endfor %}
-      </p>
     {% endfor %}
 
-    <input type="submit" value="Register" />
+    <input type="submit" value="Register" class="form-button"/>
   </form>
 
 {% endblock %}

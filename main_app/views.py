@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
@@ -111,10 +111,6 @@ class DisplayNameUpdate(UpdateView):
       
       return HttpResponseRedirect(f'/account/{str(self.object.user)}/settings')
 
-# @login_required
-# def display_name_update(request):
-  
-  
 
 ###### APOLOGY #######
 @login_required
@@ -123,10 +119,10 @@ def write_apology_letter(request):
   form = ApologyForm(request.POST or None)
   form.instance.user = request.user
   if form.is_valid():
-    obj = form.save(commit=False)
+    # obj = form.save(commit=False)
     # obj.user = request.user
     form.save()
-    form.save_m2m()
+    # form.save_m2m()
     return HttpResponseRedirect('/account/' + str(request.user))
   
   context = {
@@ -147,6 +143,22 @@ class ApologyLetterUpdate(UpdateView):
     # self.object.save_m2m()
     return HttpResponseRedirect(f'/account/{str(self.object.user)}')
 
+@method_decorator(login_required, name='dispatch')
+class ApologyLetterDelete(DeleteView):
+  model = Apology
+  def get_success_url(self):
+    return reverse_lazy('profile', kwargs={'email': self.request.user})
+
+
+def apology_index(request):
+  # we must order_by a unique field (id) and then the date updated to prevent dupes in pagination
+  apologies = Apology.objects.filter(public=True).order_by('id', 'updated_at')
+  paginator = Paginator(apologies, 1)
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  return render(request, 'apologies/index.html', {'apologies': apologies, 'page_obj': page_obj})
+
+##### GRAVEYARD ######
 
 # @login_required
 # def apology_letter_update(request, pk):
@@ -166,20 +178,11 @@ class ApologyLetterUpdate(UpdateView):
 #   }
 #   return render(request, 'main_app/apology_form.html', context)
 
-@method_decorator(login_required, name='dispatch')
-class ApologyLetterDelete(DeleteView):
-  model = Apology
-  def get_success_url(self):
-    return reverse_lazy('profile', kwargs={'email': self.request.user})
 
-def apology_show(request, apology_id):
-  apology = Apology.objects.get(id=apology_id)
-  return render(request, 'apologies/show.html', {'apology': apology})
-
-def apology_index(request):
-  # we must order_by a unique field (id) and then the date updated to prevent dupes in pagination
-  apologies = Apology.objects.filter(public=True).order_by('id', 'updated_at')
-  paginator = Paginator(apologies, 1)
-  page_number = request.GET.get('page')
-  page_obj = paginator.get_page(page_number)
-  return render(request, 'apologies/index.html', {'apologies': apologies, 'page_obj': page_obj})
+##### NOTE THIS VIEW IS CURRENTLY UNUSED, CONSIDER REMOVING#######
+# def apology_show(request, apology_id):
+#   try:
+#     apology = Apology.objects.get(id=apology_id)
+#   except apology.DoesNotExist:
+#     raise Http404('Can\'t get that Letter')
+#   return render(request, 'apologies/show.html', {'apology': apology})

@@ -10,7 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path, os
+from pathlib import Path
+
+import os
+import socket
+import psycopg2
+import dj_database_url
+from decouple import config
+
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+# If the host name starts with 'live', DJANGO_HOST = "production"
+if socket.gethostname().startswith('live'):
+    DJANGO_HOST = "production"
+# Else if host name starts with 'test', set DJANGO_HOST = "test"
+elif socket.gethostname().startswith('test'): 
+    DJANGO_HOST = "testing"
+else:
+# If host doesn't match, assume it's a development server, set DJANGO_HOST = "development"
+    DJANGO_HOST = "development"
+# Define general behavior variables for DJANGO_HOST and all others
+if DJANGO_HOST == "production":
+    DEBUG = False # set debug to false to display url error messages properly
+    STATIC_URL = 'https://my-apologies.herokuapp.com'
+else:
+    DEBUG = True
+    STATIC_URL = '/static/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +47,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z=-(m2fzf_xx3*4-ja7*%3npz2))xizi37neb!y3lq9rz#bg=l'
+SECRET_KEY = os.environ['SECRET_KEY'] or config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -40,7 +66,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'taggit',
-    # 'whitenoise',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +84,9 @@ ROOT_URLCONF = 'my_apologies.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/www/STORE/main_app/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,13 +110,16 @@ WSGI_APPLICATION = 'my_apologies.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
+# DEVELOPMENT
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'my_apologies',
     }
 }
-
+# PRODUCTION # IF IN DEVELOPMENT, COMMENT THIS OUT
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -127,10 +157,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIR = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Define EMAIL_BACKEND variable for DJANGO_HOST
+if DJANGO_HOST == "production":
+    # Output to SMTP server on DJANGO_HOST production
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+elif DJANGO_HOST == "testing":
+    # Nullify output on DJANGO_HOST test
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+else: 
+    # Output to console for all others
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Define CACHES variable for DJANGO_HOST production and all other hosts 
+if DJANGO_HOST == "production":
+   # Set cache
+   CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+            'TIMEOUT':'1800',
+            }
+        }
+   CACHE_MIDDLEWARE_SECONDS = 1800
+else: 
+   # No cache for all other hosts
+   pass

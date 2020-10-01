@@ -16,20 +16,12 @@
   <div class="pagination">
     <span class="step-links">
       {% if page_obj.has_previous %}
-        {% comment %} <a href="?page=1">&laquo; newest</a> {% endcomment %}
         <a href="?page={{page_obj.previous_page_number}}">previous</a>
       {% endif %}
-      {% comment %} <span class="current">
-        {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span> {% endcomment %}
       {% if page_obj.has_next %}
         <a href="?page={{page_obj.next_page_number}}">next</a>
-        {% comment %} <a href="?page={{page_obj.paginator.num_pages}}">oldest &raquo;</a> {% endcomment %}
       {% endif %}
     </span>
   </div>
 
-
-  {% if apologies.has_other_pages %}
-  {% endif %}
 {% endblock %}

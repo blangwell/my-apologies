@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate
+from taggit.forms import TagWidget
 
 from main_app.models import Account
 from main_app.models import Apology
@@ -29,11 +30,16 @@ class AccountAuthenticationForm(forms.ModelForm):
 class ApologyForm(forms.ModelForm):
   class Meta:
     model = Apology
-    # widgets = {
-    #   'post_text': forms.Textarea
-    # }
+    
     fields = [
       'post_text',
       'public',
       'tags'
     ]
+    widgets = {
+      'tags': TagWidget()
+    }
+
+
+# class TagForm(forms.Form):
+#   tag = forms.CharField(label='Tag', max_length=100)

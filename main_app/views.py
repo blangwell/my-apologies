@@ -123,7 +123,7 @@ def write_apology_letter(request):
   form = ApologyForm(request.POST or None)
   form.instance.user = request.user
   if form.is_valid():
-    # obj = form.save(commit=False)
+    obj = form.save(commit=False)
     # obj.user = request.user
     form.save()
     form.save_m2m()
@@ -144,8 +144,27 @@ class ApologyLetterUpdate(UpdateView):
     self.object = form.save(commit=False)
     self.object.user = self.request.user
     self.object.save()
+    # self.object.save_m2m()
     return HttpResponseRedirect(f'/account/{str(self.object.user)}')
 
+
+# @login_required
+# def apology_letter_update(request, pk):
+#   form = ApologyForm(request.POST or None)
+#   print('FORM INSTANCE ', str(form.instance))
+#   form.instance.user = request.user
+#   if form.is_valid():
+#     obj = form.save(commit=False)
+#     form.save()
+#     form.save_m2m()
+#     return HttpResponseRedirect('/account/' + str(request.user))
+  
+#   context = {
+#     'form': form,
+#     'user': form.instance.user,
+#     'pk': form.instance
+#   }
+#   return render(request, 'main_app/apology_form.html', context)
 
 @method_decorator(login_required, name='dispatch')
 class ApologyLetterDelete(DeleteView):

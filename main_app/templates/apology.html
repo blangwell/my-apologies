@@ -5,6 +5,7 @@
     {% csrf_token %}
     {{ form.post_text}}
     <p>{{ form.public.label}} {{form.public}}</p>
+    <p>Content Warning Tags:</p>
     <p>{{form.tags}}</p>
   <input type="submit" value="Save">
   </form>

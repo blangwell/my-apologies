@@ -27,6 +27,7 @@ urlpatterns = [
   path('password/', change_password, name='change_password'),
   path('apology/create', write_apology_letter, name='apology_create'),
   path('apology/<int:pk>/update/', ApologyLetterUpdate.as_view(), name='apology_update'),
+  # path('apology/<int:pk>/update/', apology_letter_update, name='apology_update'),
   path('apology/<int:pk>/delete/', ApologyLetterDelete.as_view(), name='apology_delete'),
   path('apology/<int:apology_id>', apology_show, name='apology_show'),
   path('apology/index', apology_index, name='apology_index'),

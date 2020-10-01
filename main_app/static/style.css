@@ -3,14 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
-.page-content {
+body{
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  justify-content: center;
+  align-items: center;
+}
+.page-content {
+  /* max-width: 500px; */
+  text-align: center;
 }
 
-h1, h2 {
+h1, h2, nav-logo {
   font-family: 'Vollkorn', serif;
 }
 
@@ -22,6 +25,21 @@ a {
   font-family: 'Peddana', serif;
   font-size: 25px;
   color: darkred;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: black;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-logo {
+  font-size: 40px;
+  text-decoration: none;
+
 }
 
 .error-message  {

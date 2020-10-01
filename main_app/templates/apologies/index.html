@@ -2,13 +2,13 @@
 
 {% block content %}
   <h1>Letters</h1>
-  {% comment %} {% for apology in apologies %}
-  <p>{{apology}}</p>
-  <p> - {{apology.user.display_name}}</p>
-  <p> ---%%---
-  {% endfor %} {% endcomment %}
 
   {% for apology in page_obj %}
+    {% if apology.tags %}
+      {% for tag in apology.tags.all %}
+        <small>Content Warning: {{tag}}</small>
+      {% endfor %}
+    {% endif %}
     <p>{{apology}}</p>
     <p> - {{apology.user.display_name}}</p>
   {% endfor %}

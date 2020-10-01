@@ -89,7 +89,7 @@ class Apology(models.Model):
   # ForeignKey is used for 1:M relationships, one user can have many posts
   user = models.ForeignKey(Account, on_delete=models.CASCADE)
   # tags = models.ManyToManyField(Tag)
-  tags = TaggableManager()
+  tags = TaggableManager(blank=True)
   created_at = models.DateField(auto_now_add=True)
   updated_at = models.DateField(auto_now=True)
 

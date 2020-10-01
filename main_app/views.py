@@ -23,7 +23,7 @@ def profile(request, email):
   try:
     user = Account.objects.get(email=email)
     apologies = Apology.objects.filter(user=user)
-  except: apology.DoesNotExist:
+  except user.DoesNotExist:
     raise Http404('Can\'t get that Letter')
   return render(request, 'profile.html', {'email': email, 'apologies': apologies})
 

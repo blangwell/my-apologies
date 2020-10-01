@@ -16,6 +16,7 @@ from main_app.views import (
     apology_index,
     settings,
     DisplayNameUpdate,
+
 )
 
 
@@ -36,3 +37,6 @@ urlpatterns = [
   path('account/<email>/settings', settings, name='account_settings'),
   path('account/settings/display_name/<int:pk>', DisplayNameUpdate.as_view(), name='update_display_name'),
 ]
+
+handler404 = views.handler404,
+handler500 = views.handler500,

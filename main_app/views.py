@@ -19,9 +19,9 @@ def about(request):
   return render(request, 'about.html')
 
 @login_required
-def profile(request, email):
+  user = Account.objects.get(email=email)
   try:
-    user = Account.objects.get(email=email)
+    def profile(request, email):
     apologies = Apology.objects.filter(user=user)
   except user.DoesNotExist:
     raise Http404('Can\'t get that Letter')
@@ -160,6 +160,13 @@ def apology_index(request):
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   return render(request, 'apologies/index.html', {'apologies': apologies, 'page_obj': page_obj})
+
+
+def handler404(request):
+  return render(request, '404.html', status=404)
+
+def handler500(request):
+  return render(request, '500.html', status=500)
 
 ##### GRAVEYARD ######
 

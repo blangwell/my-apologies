@@ -16,6 +16,9 @@ import os
 import socket
 import psycopg2
 import dj_database_url
+import mimetypes
+
+mimetypes.add_type("text/css", ".css", True)
 
 
 DATABASE_URL = os.environ['DATABASE_URL']

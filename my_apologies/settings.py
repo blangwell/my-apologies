@@ -67,7 +67,7 @@ ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 INSTALLED_APPS = [
     'main_app',
     'taggit',
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

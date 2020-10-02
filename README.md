@@ -63,15 +63,30 @@ def registration_view(request):
       pre_save.connect(set_username, sender=Account)
       form.save()
 ```
-After testing account authorization successfully, I created the account settings view and built implemented forms to change both the user's display name and password. Once I had achieved full CRUD capabilities on Account, I moved on to CRUDing Apology letters. Once the Apology letters were successfully populating on the backend, I used Django's Pagination feature to paginate the most recent apology letters in `templates/apologies/index.html`.
+After testing account authorization successfully, I created the account settings view and built forms to change the user's display name and password. Once I had achieved full CRUD capabilities on Account, I moved on to CRUDing Apology letters. To update and delete apologies, I created custom classes that inherit from Django's `UpdateView` and `DeleteView` classes:
+```py
+# main_app/views.py
+@method_decorator(login_required, name='dispatch')
+class ApologyLetterUpdate(UpdateView):
+  model = Apology
+  fields = ['post_text', 'public']
+
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.user = self.request.user
+    self.object.save()
+    return HttpResponseRedirect(f'/account/{str(self.object.user)}')
+```
+
+Once Apology letters were successfully CRUDing on the backend, I used Django's Pagination feature to paginate the most recent apology letters in `templates/apologies/index.html`.
 
 ## Unsolved Problems/Hurdles
-The largest unsolved problem at the time of writing this would be successfully rendering static files in production. Bootstrap styles are being successfully applied to page elements on the Heroku App, but not the custom styles described in `main_app/static/style.css`. The error in the dev tools console indicates a MIME type issue.
+The largest unsolved problem at the time of writing this was successfully rendering static files in production. Served by a CDN, Bootstrap styles were successfully applied to page elements on the Heroku App. The custom styles described in `main_app/static/style.css` threw the following error in browser:
 ```
 Refused to apply style from 'https://my-apologies.herokuapp.com/static/style.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.
 ```
-I attempted to fix this by importing Python's `mimetypes` module in `settings.py` and calling its `add_type()` method. I refactored the static configuration in settings.py multiple times, ultimately with no luck. The deployed app is currently functional sans my styling. In the week to come, I look forward to resolving this issue and refining the client side of this project into something truly beautiful.
-Getting dumped into the deep end of a Django project with little prior experience with the framework was an excellent learning opportunity. I was able to strenghten my comprehension of the authorization process and get a little more comfortable deploying apps via Heroku. Additionally, I made some valuable mistakes in my version control process: not merging feature branches back into master soon enough, waiting too long to commit, not beginning this readme until the end of the process, etc. I failed early and often with this project and grew as a result.
+I attempted to fix this by importing Python's `mimetypes` module in `settings.py` and calling its `add_type()` method. I refactored the `STATIC_URL` and `STATIC_ROOT` variables in `settings.py` multiple times with no luck. What ultimately fixed the issue was pointing the `STATIC_URL` variable to `https://my-apologies.herokuapp.com/static/` in `settings.py` and removing the `DISABLE_COLLECTSTATIC=1` config variable from the app's Heroku settings. 
+Getting dumped into the deep end of a Django project with little prior experience with the framework was an excellent learning opportunity. I was able to strenghten my comprehension of user authorization and get more comfortable with the deployment process. I failed early and often with this project and grew as a result.
 
 ## What's Next?
 The next, crucial step for the app is content moderation. In order to be a truly viable concept, there must be measures in place to defend against harassment, doxxing, and general-purpose trolling. This includes implementing an optional profanity filter and a way to report individual posts. If you'd like to get involved with the project, please feel free to fork and clone this repo or get in touch via [LinkedIn](https://www.linkedin.com/in/blangwell/)! 

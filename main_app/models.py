@@ -48,8 +48,6 @@ completely new User model from scratch with new fields
 class Account(AbstractBaseUser):
   email = models.EmailField(verbose_name="email", max_length=60, unique=True)
   display_name = models.CharField(max_length=30, default='Anonymous')
-  # tags = models.ManyToManyField(Tag)
-  # tags = TaggableManager()
   user_tags = models.CharField(max_length=1500, blank=True, null=True)
 
 

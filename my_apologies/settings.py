@@ -38,7 +38,7 @@ else:
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
     DEBUG = False # set debug to false to display url error messages properly
-    STATIC_URL = 'https://my-apologies.herokuapp.com/'
+    STATIC_URL = 'https://my-apologies.herokuapp.com/main_app/static/'
 else:
     DEBUG = False
     STATIC_URL = '/static/'

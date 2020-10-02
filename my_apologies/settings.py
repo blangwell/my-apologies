@@ -26,6 +26,9 @@ import dj_database_url
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # If the host name starts with 'live', DJANGO_HOST = "production"
 if socket.gethostname().startswith('live'):
     DJANGO_HOST = "production"
@@ -38,17 +41,14 @@ else:
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
     DEBUG = False # set debug to false to display url error messages properly
-    STATIC_URL = 'https://my-apologies.herokuapp.com/main_app/static/'
+    STATIC_URL = 'https://my-apologies.herokuapp.com/static/'
 else:
     DEBUG = False
-    STATIC_URL = '/static/'
+    STATIC_URL = 'https://my-apologies.herokuapp.com/static/'
 
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = os.environ['SECRET_KEY'] 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 # DEBUG = False # set debug to false to display url error messages properly
@@ -73,7 +73,7 @@ ALLOWED_HOSTS = ['my-apologies.herokuapp.com', '127.0.0.1',]
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'main_app',
     'django.contrib.admin',

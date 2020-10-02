@@ -39,14 +39,15 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 #     DEBUG = True
 #     STATIC_URL = '/static/'
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = False # set debug to false to display url error messages properly
-# STATIC_URL = 'https://my-apologies.herokuapp.com/'
-STATIC_URL = '/static/'
+STATIC_URL = 'https://my-apologies.herokuapp.com/'
+# STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -67,7 +68,7 @@ ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 INSTALLED_APPS = [
     'main_app',
     'taggit',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

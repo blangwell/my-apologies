@@ -68,6 +68,10 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 
+WHITENOISE_MIMETYPES = {
+    '.xsl': 'application/xml'
+}
+
 
 # Application definition
 

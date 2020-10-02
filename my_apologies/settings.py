@@ -66,11 +66,12 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
+ALLOWED_HOSTS = ['my-apologies.herokuapp.com', '127.0.0.1',]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'main_app',
     'django.contrib.admin',

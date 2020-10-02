@@ -16,7 +16,7 @@ import os
 import socket
 import psycopg2
 import dj_database_url
-import django_heroku
+# import django_heroku
 # import mimetypes
 
 
@@ -199,7 +199,7 @@ else:
    # No cache for all other hosts
    pass
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 #####################
 #######################

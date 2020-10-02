@@ -5,7 +5,7 @@
   <div class="page-content">
     <h1>Your Profile</h1>
     <p>{{email}}</p>
-    <a href="{% url 'apology_create'%}">Write a New Letter</a><br />
+    <a href="{% url 'apology_create'%}">Write a New Letter</a><br /><br />
     {% if apologies %}
     <h2>Your Letters</h2>
       {% for apology in apologies %}
@@ -13,6 +13,7 @@
       <a href="{% url 'apology_update' apology.id %}">Edit Letter</a></p>
       {% endfor %}
     {% endif %}
+    <br />
     <a href="{% url 'account_settings' email %}">Account Settings</a>
   </div>
 {% endblock %}

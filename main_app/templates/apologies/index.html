@@ -8,19 +8,25 @@
     {% if apology.tags.all %}
       <p class="content-warning" style="font-family: 'Vollkorn', serif; display: inline;">Content Warning:
       {% for tag in apology.tags.all %}<small>{{tag}} | </small>{% endfor %}
-       </p>
+      </p>
     {% endif %}
     <p class="apology-text" style="max-width: 300px;">{{apology}}</p>
     <p style="font-family: 'Vollkorn', serif;"> - {{apology.user.display_name}}</p>
   {% endfor %}
-
+  <br />
   <div class="pagination">
-    <span class="step-links">
+    <span class="step-links prev-next">
       {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">previous</a>
+      <li class="page-item">
+        <a class="page-link" href="?page={{page_obj.previous_page_number}}">previous</a>
+      </li>
       {% endif %}
+        
       {% if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}">next</a>
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.next_page_number}}">next</a>
+        </li>
+
       {% endif %}
     </span>
   </div>

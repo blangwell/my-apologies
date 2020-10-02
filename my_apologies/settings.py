@@ -166,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-Define EMAIL_BACKEND variable for DJANGO_HOST
+# Define EMAIL_BACKEND variable for DJANGO_HOST
 if DJANGO_HOST == "production":
     # Output to SMTP server on DJANGO_HOST production
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

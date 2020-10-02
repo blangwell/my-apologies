@@ -47,7 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ['SECRET_KEY'] 
 
-
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # DEBUG = False # set debug to false to display url error messages properly
 # STATIC_URL = 'https://my-apologies.herokuapp.com/'

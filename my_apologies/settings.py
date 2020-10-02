@@ -22,7 +22,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # If the host name starts with 'live', DJANGO_HOST = "production"
-if socket.gethostname().startswith('test'):
+if socket.gethostname().startswith('live'):
     DJANGO_HOST = "production"
 # Else if host name starts with 'test', set DJANGO_HOST = "test"
 elif socket.gethostname().startswith('test'): 
@@ -40,7 +40,12 @@ else:
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+SECRET_KEY = os.environ['SECRET_KEY'] 
+
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # DEBUG = False # set debug to false to display url error messages properly
 # STATIC_URL = 'https://my-apologies.herokuapp.com/'
 # STATIC_URL = '/static/'
@@ -52,7 +57,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY'] 
 #PRODUCTION
 # or config('SECRET_KEY')
 
@@ -65,15 +69,15 @@ ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 # Application definition
 
 INSTALLED_APPS = [
-    'main_app',
-    'taggit',
     'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
+    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'taggit',
 ]
 
 MIDDLEWARE = [

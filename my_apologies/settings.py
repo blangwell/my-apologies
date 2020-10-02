@@ -47,7 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ['SECRET_KEY'] 
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # DEBUG = False # set debug to false to display url error messages properly
 # STATIC_URL = 'https://my-apologies.herokuapp.com/'
@@ -68,15 +68,9 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 ALLOWED_HOSTS = ['my-apologies.herokuapp.com',]
 
-WHITENOISE_MIMETYPES = {
-    '.xsl': 'application/xml'
-}
-
-
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'main_app',
     'django.contrib.admin',

@@ -61,6 +61,10 @@ a:hover {
   border-radius: 5px;
 }
 
+.page-content {
+  max-width: 600px
+}
+
 #hamburger {
   border-style: none;
 }

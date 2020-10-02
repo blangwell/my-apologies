@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="page-content">
   <h1>Letters</h1>
 
   {% for apology in page_obj %}
@@ -23,7 +24,7 @@
       {% endif %}
     </span>
   </div>
-
+</div>
 
 
 {% endblock %}
